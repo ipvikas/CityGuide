@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Know about the City</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <header class="top">
+      <div>
+        <h1 data-i18n="appName">Know about the City</h1>
+        <p class="tagline" data-i18n="tagline">City Guide - Vikas</p>
+      </div>
+      <label class="lang">
+        <span class="visually-hidden" data-i18n="language">Language</span>
+        <select id="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="hi">हिन्दी</option>
+        </select>
+      </label>
+    </header>
+
+    <!-- Search box -->
+    <form id="search-form" class="search">
+      <input id="city-input" type="text" autocomplete="off" aria-label="City">
+      <button id="search-button" type="submit" data-i18n="search">Search</button>
+    </form>
+    <div id="recent" class="recent"></div>
+
+    <!-- Unit choices (remembered) -->
+    <div class="units">
+      <label><span data-i18n="temp">Temperature</span>
+        <select id="unit-temp"><option value="C">°C</option><option value="F">°F</option></select></label>
+      <label><span data-i18n="wind">Wind</span>
+        <select id="unit-wind"><option value="kmh">km/h</option><option value="ms">m/s</option><option value="mph">mph</option></select></label>
+      <label><span data-i18n="pressure">Pressure</span>
+        <select id="unit-pressure"><option value="hpa">hPa</option><option value="mbar">mbar</option><option value="atm">atm</option></select></label>
+    </div>
+
+    <div id="loading" class="loading" hidden><span class="spinner"></span><span data-i18n="loading">Loading weather...</span></div>
+    <p id="message" class="message" role="alert" hidden></p>
+
+    <section id="result" class="result" hidden>
+      <h2 id="city-name"></h2>
+      <div class="sky"><span id="weather-emoji" class="emoji" aria-hidden="true"></span><span id="weather-description"></span></div>
+      <p id="temperature" class="temperature"></p>
+      <p id="feels-like" class="feels-like"></p>
+      <ul id="alerts" class="alerts"></ul>
+      <div id="details" class="details"></div>
+
+      <div class="outfit">
+        <h3 id="outfit-title">What to wear</h3>
+        <ul id="outfit-list"></ul>
+      </div>
+
+      <h3 class="section-title" data-i18n="forecast">7-day forecast</h3>
+      <ul id="forecast-list" class="forecast"></ul>
+
+      <div id="compare" hidden>
+        <h3 class="section-title" data-i18n="compare">Compare cities</h3>
+        <div id="compare-table" class="scroll"></div>
+      </div>
+
+      <p class="info"><strong data-i18n="localTime">Local time</strong>: <span id="local-time"></span></p>
+      <p class="info"><strong data-i18n="currency">Currency</strong>: <span id="currency"></span></p>
+      <div class="places">
+        <h3 data-i18n="places">Places to visit</h3>
+        <ul id="places-list"></ul>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
