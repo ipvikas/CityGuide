@@ -7,38 +7,27 @@ Weather apps show lots of numbers, but I just want to know one thing: **"What sh
 Anyone who checks the weather before leaving home: commuters, students, travellers. No technical skill needed.
 
 ## What it does (one sentence)
-You type a city and get today's weather, a 7-day forecast and plain-English advice on what to wear.
+You type a city and get today's weather, a 7-day forecast in your language and advice on what to wear and lots of other stuffs, related with that city!
 
 ## Features
-
-### Version 1 (smallest useful thing)
 - **F1.** Type a city name, press Enter or a Search button, and the app finds it.
 - **F2.** Show current temperature (°C) and "feels like".
 - **F3.** Show a short description with an emoji (e.g. "☀️ Clear sky").
 - **F4.** Show outfit advice following the "Outfit rules" section below (clothing from "feels like", plus umbrella, boots and windbreaker extras).
 - **F5.** Friendly messages when something goes wrong (city not found, no internet, API down).
-
-### Version 2 (the full day and week)
 - **F6.** Show humidity, wind speed and today's chance of rain.
 - **F7.** Show today's sky label (Clear, Cloudy, Rainy, Windy, etc.) with today's minimum and maximum temperature.
 - **F8.** Change the page background to match the sky: Clear, Cloudy, Dusty, Windy or Rainy (also Snowy and Foggy).
 - **F9.** 7-day forecast: each day shows its low and high, with an emoji.
 - **F10.** °C / °F switch that updates every temperature on screen.
 - **F11.** Remember recent cities (last 5) and show them as clickable buttons.
-
-### Version 3 (more detail and comparing)
 - **F12.** Wind speed unit switch: km/h, m/s, mph.
 - **F13.** Atmospheric pressure with a unit switch: atm or mbar.
-- **F14.** (Paused: no "+" button for now, so cities cannot be added.) A "+" button adds another city; cities sit side by side so every field can be compared.
-- **F15.** (Paused with F14.) Remove a city from the comparison.
-
-### Version 4 (V4: forecast, languages, compare and local extras)
-- V4 also delivers F6 to F15 (details, forecast, units, compare) and keeps everything from V1.
-- **F16.** Live local time of the searched city with its time zone, e.g. "4:30 PM IST – India Standard Time".
-- **F17.** Language dropdown (English by default, choice remembered) translates every label, weather description, forecast, alert, message and the outfit advice. Supported: English, Español, Français, हिन्दी.
-- **F18.** Up to 5 places to visit, most popular first, each with a 1-2 line description.
-- **F20.** Weather alerts: thunderstorm, strong wind (60 km/h or more), extreme heat (feels like 38°C or more).
-- **F19.** The country's currency with the latest USD rate, e.g. "INR (₹), 1 USD = ₹…", refreshed automatically.
+- **F14.** Live local time of the searched city with its time zone, e.g. "4:30 PM IST – India Standard Time".
+- **F15.** Language dropdown (English by default, choice remembered) translates every label, weather description, forecast, alert, message and the outfit advice. Supported: English, Español, Français, हिन्दी.
+- **F16.** Up to 5 places to visit, most popular first, each with a 1-2 line description.
+- **F17.** Weather alerts: thunderstorm, strong wind (60 km/h or more), extreme heat (feels like 38°C or more).
+- **F18.** The country's currency with the latest USD rate, e.g. "INR (₹), 1 USD = ₹…", refreshed automatically.
 
 ## Data
 - Source: **Open-Meteo** (free, no key needed). Two calls:
@@ -47,14 +36,13 @@ You type a city and get today's weather, a 7-day forecast and plain-English advi
   2. *Forecast API*: gives current temperature, feels like, humidity, wind, pressure, weather code, and daily min/max temperature and rain chance for 7 days.
      `https://api.open-meteo.com/v1/forecast?latitude=51.5&longitude=-0.12&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,surface_pressure&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code&forecast_days=7&timezone=auto`
 - Weather codes from Open-Meteo are turned into our labels and emojis. "Windy" is worked out from wind speed.
-
 - Dusty: Open-Meteo's air quality API (`https://air-quality-api.open-meteo.com/v1/air-quality?current=dust`); dust of 100 µg/m³ or more counts as Dusty.
-- V4 free, no-key sources: Wikipedia (places and their reading numbers, `https://en.wikipedia.org/w/api.php`), restcountries.com (currency), open.er-api.com (USD rates, updated daily by the source).
+- Wikipedia (places and their reading numbers, `https://en.wikipedia.org/w/api.php`), restcountries.com (currency), open.er-api.com (USD rates, updated daily by the source).
 - Pressure arrives in hPa (same as mbar). atm = hPa ÷ 1013.25.
 - Saved in the browser (localStorage): recent cities and unit choices. Nothing else is stored.
 
 ## Look and feel
-- App name: **Know about the City**. Subtitle: **City Guide - Vikas**. No version badge on the page.
+- App name: **Know about the City**. Subtitle: **City Guide - Vikas**.
 - Clean, one centred card on a full-page background that changes with the sky (sunny = bright blue, rainy = grey-blue, night/cloudy = darker).
 - Large temperature, big emoji, readable text on any background.
 - Works on a phone-width screen as well as a laptop.
@@ -82,18 +70,16 @@ The advice combines one **clothing** line (from "feels like"), plus any **extras
 - ☔ **Umbrella** if today's chance of rain is 50% or more, or it is raining now.
 - 🥾 **Waterproof boots** instead of the umbrella if it is snowing.
 - 💨 **Windbreaker** if the wind is 30 km/h or more.
-
 Notes: the rules always use °C and km/h behind the scenes, so the °F and wind-unit switches never change the advice. Example: feels like 8°C, 60% rain, wind 35 km/h gives "Warm jacket, ☔ umbrella, 💨 windbreaker".
 
 ## Out of scope
 Accounts and logins, hourly forecast, maps, weather alerts, notifications, radar, saving a "home" city, languages other than English, and any paid API.
 
 ## Done when
-1. Typing "London" and pressing Enter shows its current temperature, feels like, and an emoji description. (V1)
-2. Typing "asdfgh" or searching with Wi-Fi off shows a friendly message, not a blank screen or error. (V1)
-3. A freezing city shows "Heavy coat, hat and gloves", a hot city shows "Shorts, sunscreen and water", and rain or wind adds the ☔ umbrella or 💨 windbreaker. With Español chosen in the language dropdown, the whole page is in Spanish. (V1, V4)
-4. Humidity, wind, rain chance, today's low/high and 7 forecast days all appear, and the background changes between a sunny and a rainy city. (V2)
-5. Clicking °F changes every temperature, and after refreshing, °F and my last cities are still there. (V2)
-6. Wind switches between km/h, m/s and mph, and pressure between atm and mbar. (V3)
-7. (Paused with F14) Clicking "+" and adding a second city shows both side by side with all fields; removing one works. (V3)
-8. Searching "Mumbai" shows a ticking time like "4:30 PM IST – India Standard Time", INR (₹) with a USD rate, and up to 5 places, each with a short description. (V4)
+1. Typing "London" and pressing Enter shows its current temperature, feels like, and an emoji description.
+2. Typing "asdfgh" or searching with Wi-Fi off shows a friendly message, not a blank screen or error.
+3. A freezing city shows "Heavy coat, hat and gloves", a hot city shows "Shorts, sunscreen and water", and rain or wind adds the ☔ umbrella or 💨 windbreaker. With Español chosen in the language dropdown, the whole page is in Spanish.
+4. Humidity, wind, rain chance, today's low/high and 7 forecast days all appear, and the background changes between a sunny and a rainy city.
+5. Clicking °F changes every temperature, and after refreshing, °F and my last cities are still there.
+6. Wind switches between km/h, m/s and mph, and pressure between atm and mbar.
+7. Searching "Mumbai" shows a ticking time like "4:30 PM IST – India Standard Time", INR (₹) with a USD rate, and up to 5 places, each with a short description.
